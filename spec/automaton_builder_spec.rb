@@ -18,30 +18,75 @@ describe AutomatonBuilder do
   end# }}}
 
   describe "specifying dimensions" do# {{{
-    before do
-      @object = AutomatonBuilder.new("my name").dimensions(2).build
-    end
-    subject { @object }
+    describe "valid dimensions" do
+      before do
+        @object = AutomatonBuilder.new("my name").dimensions(1).build
+      end
+      subject { @object }
 
-    its(:dimensions) { should eq 2 }
+      its(:dimensions) { should eq 1 }
+    end
+
+    describe "invalid dimensions" do
+
+      it "should exit with dimensions < 1" do
+        lambda do
+          AutomatonBuilder.new("my name").dimensions(0).build
+        end.should raise_error(SystemExit)
+      end
+
+      it "should exit with dimensions > 1" do
+        lambda do
+          AutomatonBuilder.new("my name").dimensions(2).build
+        end.should raise_error(SystemExit)
+      end
+
+    end
+
   end# }}}
 
   describe "specifying type" do# {{{
-    before do
-      @object = AutomatonBuilder.new("my name").type(:other).build
-    end
-    subject { @object }
+    describe "valid type" do
+      before do
+        @object = AutomatonBuilder.new("my name").type(:elementary).build
+      end
+      subject { @object }
 
-    its(:type) { should eq :other }
+      its(:type) { should eq :elementary }
+    end
+
+    describe "invalid type" do
+      it "should exit with a bad type of type" do
+        lambda do
+          AutomatonBuilder.new("my name").type(2).build
+        end.should raise_error(SystemExit)
+      end
+
+      it "should exit with unknown type " do
+        lambda do
+          AutomatonBuilder.new("my name").type(:other).build
+        end.should raise_error(SystemExit)
+      end
+    end
   end# }}}
 
   describe "specifying width" do# {{{
-    before do
-      @object = AutomatonBuilder.new("my name").width(123).build
-    end
-    subject { @object }
+    describe "valid width" do
+      before do
+        @object = AutomatonBuilder.new("my name").width(123).build
+      end
+      subject { @object }
 
-    its(:width) { should eq 123 }
+      its(:width) { should eq 123 }
+    end
+
+    describe "invalid width" do
+      it "should exit with a width < 1" do
+        lambda do
+          AutomatonBuilder.new("my name").width(0).build
+        end.should raise_error(SystemExit)
+      end
+    end
   end# }}}
 
 end

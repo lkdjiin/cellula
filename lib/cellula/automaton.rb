@@ -20,6 +20,9 @@ module Cellula
     # rule_number - Rule of the automaton. TODO write more about the types.
     #               Currently rule is a Symbol.
     def initialize(name, dimensions, type, width, rule_number)
+      panic "Bad dimensions: #{dimensions}" if dimensions != 1
+      panic "Bad type: #{type}" if type != :elementary
+      panic "Bad width: #{width}" if width < 1
       @name = name
       @dimensions = dimensions
       @type = type

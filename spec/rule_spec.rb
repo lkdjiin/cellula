@@ -4,19 +4,19 @@ describe Rule do
 
   describe "creation" do# {{{
     it "should raise error if rule_number isn't a symbol" do
-      lambda {Rule.new(110)}.should raise_error(ArgumentError)
+      lambda {Rule.new(110)}.should raise_error(SystemExit)
     end
 
     it "should raise error if rule_number is greater than 255" do
-      lambda {Rule.new(:wolfram_code_256)}.should raise_error(ArgumentError)
+      lambda {Rule.new(:wolfram_code_256)}.should raise_error(SystemExit)
     end
 
     it "should raise error if rule_number is less than 0" do
-      lambda {Rule.new(:"wolfram_code_-110")}.should raise_error(ArgumentError)
+      lambda {Rule.new(:"wolfram_code_-110")}.should raise_error(SystemExit)
     end
 
     it "should raise error if rule_number is dumb" do
-      lambda {Rule.new(:foo_bar_110)}.should raise_error(ArgumentError)
+      lambda {Rule.new(:foo_bar_110)}.should raise_error(SystemExit)
     end
   end# }}}
 

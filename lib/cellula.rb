@@ -63,4 +63,15 @@ module Cellula
     cellula path/to/automaton_file.rb
     "
   end
+
+  # Public: Print an error message and exit with code 1.
+  #
+  # message - The String message to display to user before exiting.
+  #
+  # Returns nothing.
+  def panic(message = "Unknown error")
+    puts "** Panic **"
+    puts message
+    exit(1)
+  end
 end

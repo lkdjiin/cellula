@@ -20,9 +20,12 @@ module Cellula
     #               * :single
     #               * :summed
     #               * :averaged
+    #               Currently limited to :random.
     # generations - Integer number of generations to study.
     #               Default is 10.
     def initialize(ca_name, method, generations)
+      panic "Bad number of generations: #{generations}" if generations < 1
+      panic "Bad studying method: #{method}" if method != :random
       @ca_name = ca_name
       @method = method
       @generations = generations

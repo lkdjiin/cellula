@@ -9,7 +9,11 @@ module Cellula
     # rule_number - Currently accept only wolfram code, in the form
     #               of a Symbol like :wolfram_code_110.
     def initialize(rule_number)
-      @rule_number = deduce_rule_number(rule_number)
+      begin
+        @rule_number = deduce_rule_number(rule_number)
+      rescue Exception => e
+        panic e.message
+      end
     end
 
     # Public: Get the Integer wolfram code of the rule.
