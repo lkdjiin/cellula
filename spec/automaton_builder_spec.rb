@@ -10,7 +10,7 @@ describe AutomatonBuilder do
     its(:dimensions) { should eq 1 }
     its(:type) { should eq :elementary }
     its(:width) { should eq 20 }
-    its(:rules) { should eq :wolfram_code_110 }
+    specify { @object.rule.is_a?(Rule).should be_true }
 
     it "should not allow to change name" do
       lambda{ @object.name = "other" }.should raise_error(NoMethodError)
@@ -42,15 +42,6 @@ describe AutomatonBuilder do
     subject { @object }
 
     its(:width) { should eq 123 }
-  end# }}}
-
-  describe "specifying rules" do# {{{
-    before do
-      @object = AutomatonBuilder.new("my name").rules(:other).build
-    end
-    subject { @object }
-
-    its(:rules) { should eq :other }
   end# }}}
 
 end

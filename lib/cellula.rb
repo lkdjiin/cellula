@@ -3,6 +3,7 @@ require 'cellula/automaton'
 require 'cellula/student'
 require 'cellula/automaton_builder'
 require 'cellula/student_builder'
+require 'cellula/rule'
 
 # Public: Cellula is a framework for building, running and studying
 # cellular automata. For this, Cellula provides a simple DSL.
@@ -13,7 +14,7 @@ require 'cellula/student_builder'
 #       dimension 1
 #       type      :elementary
 #       width     20
-#       rules     :wolfram_code_110
+#       rule      :wolfram_code_110
 #     end
 #
 #  Save the previous example in a file named `my_automaton.rb` and
@@ -44,11 +45,22 @@ module Cellula
     @student = Docile.dsl_eval(StudentBuilder.new(name), &block).build
   end
 
-  def run
-    @auto.generate(@student.generations) do |num, generation|
-      printf "Gen %4s: %s\n", num, generation.join()
-    end
-    @student.say_hello
+  # Public: Display a banner on stdout.
+  #
+  # Returns nothing.
+  def banner
+    puts "Cellula version " + File.read('VERSION').strip
+    puts ""
   end
 
+  # Public: Display application's usage on stdout.
+  #
+  # Returns nothing.
+  def usage
+    puts "
+    usage:
+
+    cellula path/to/automaton_file.rb
+    "
+  end
 end

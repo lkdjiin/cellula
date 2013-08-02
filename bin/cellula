@@ -6,19 +6,15 @@ $CELLULA_PATH = File.expand_path(File.dirname(__FILE__)) + '/..'
 require 'cellula'
 include Cellula
 
-# TODO banner method
-puts "Cellula version " + File.read('VERSION').strip
-puts ""
+banner
 
 if ARGV[0].nil?
-  # TODO usage method
-  puts "
-  usage:
-
-  cellula path/to/automaton_file.rb
-  "
-else
-  # TODO ? method
-  load ARGV[0].dup
-  run
+  usage
+  exit
 end
+
+load ARGV[0].dup
+@auto.generate(@student.generations) do |num, generation|
+  printf "Gen %4s: %s\n", num, generation.join()
+end
+puts @student.say_hello

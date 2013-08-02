@@ -38,8 +38,7 @@ module Cellula
     attr_accessor :generations
 
     def say_hello
-      puts "Hello, I am #{@ca_name}."
-      puts "I am studying with a #{@method} method."
+      "Hello, I'm studying #{@ca_name} with #{@method} method."
     end
   end
 end

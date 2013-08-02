@@ -7,23 +7,24 @@ module Cellula
   # because Automaton's creation needs a lots of parameters. It is
   # much more simpler to create Automata using AutomatonBuilder class.
   #
-  # TODO Document rules.
+  # TODO Document rule.
   class Automaton
 
     # Public: Initialize a new Automaton.
     #
-    # name       - String name of the automaton.
-    # dimensions - Integer number of dimensions for the automaton's
-    #              grid. Default is 1.
-    # type       - Currently only :elementary.
-    # width      - The Integer width of the automaton's grid.
-    # rules      - Rules of the automaton. TODO write more about the types.
-    def initialize(name, dimensions, type, width, rules)
+    # name        - String name of the automaton.
+    # dimensions  - Integer number of dimensions for the automaton's
+    #               grid. Default is 1.
+    # type        - Currently only :elementary.
+    # width       - The Integer width of the automaton's grid.
+    # rule_number - Rule of the automaton. TODO write more about the types.
+    #               Currently rule is a Symbol.
+    def initialize(name, dimensions, type, width, rule_number)
       @name = name
       @dimensions = dimensions
       @type = type
       @width = width
-      @rules = rules
+      @rule = Rule.new(rule_number)
       @grid = Array.new(@width)
       @grid.map! {|item| rand(2) }
     end
@@ -40,48 +41,49 @@ module Cellula
     # Public: Set/get the Integer width of the automaton's grid.
     attr_accessor :width
 
-    # Public: Set/get the rules of the automaton.
-    attr_accessor :rules
+    # Public: Get the rule of the automaton.
+    attr_reader :rule
 
-    # Public:
+    # Public: Generate successive generations of this automaton.
+    #
+    # total_generations - Integer number of generations to produce.
+    #                     If, for example, `total_generations == 4` then
+    #                     #generate will produce 5 generations: The
+    #                     original generation plus the four you want.
+    # block             - What to do with a generation.
+    #
+    # Example
+    #
+    #    automaton.generate(10) do |num, generation|
+    #      printf "Gen %4s: %s\n", num, generation.join()
+    #    end
+    #    # => will result in something like that:
+    #    # => Gen    0: 0101001010001011000001000100000100101011
+    #    # => Gen    1: 0000010000010000000010001000001001000000
+    #    # => Gen    2: 0000100000100000000100010000010010000000
+    #    # => Gen    3: 0001000001000000001000100000100100000000
+    #    # => Gen    4: 0010000010000000010001000001001000000000
+    #
+    # Returns successive generations as Array.
     def generate(total_generations, &block)
       block.call(0, @grid)
       1.upto(total_generations) do |i|
-        apply_rules
+        apply_rule
         block.call(i, @grid)
       end
     end
 
     private
 
-    def apply_rules
-      next_grid = @grid.map.with_index {|cell, i| rule_4(cell, i) }
+    # Apply rule to the entire grid. @grid becomes the next generation.
+    #
+    # Returns nothing.
+    def apply_rule
+      next_grid = @grid.map.with_index do |cell, i|
+        @rule.apply_rule(i, @grid)
+      end
       @grid = next_grid
     end
 
-    # 111	110 101	100	011	010	001	000
-    #  0   0   0   0   0   1   0   0
-    def rule_4(cell, i)
-      left_cell = if i > 0
-        @grid[i - 1]
-      else
-        @grid[-1]
-      end
-      right_cell = if i == @width - 1
-        @grid[0]
-      else
-        @grid[i + 1]
-      end
-      case [left_cell, cell, right_cell]
-      when [1,1,1] then 0
-      when [1,1,0] then 0
-      when [1,0,1] then 0
-      when [1,0,0] then 0
-      when [0,1,1] then 0
-      when [0,1,0] then 1
-      when [0,0,1] then 0
-      when [0,0,0] then 0
-      end
-    end
   end
 end
