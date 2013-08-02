@@ -4,3 +4,21 @@ $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 $CELLULA_PATH = File.expand_path(File.dirname(__FILE__)) + '/..'
 
 require 'cellula'
+include Cellula
+
+# TODO banner method
+puts "Cellula version " + File.read('VERSION').strip
+puts ""
+
+if ARGV[0].nil?
+  # TODO usage method
+  puts "
+  usage:
+
+  cellula path/to/automaton_file.rb
+  "
+else
+  # TODO ? method
+  load ARGV[0].dup
+  run
+end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cellula_core (0.1.0)
+    cellula (0.1.0)
       docile (= 1.1.0)
 
 GEM
@@ -29,7 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cellula_core!
+  cellula!
   coco (>= 0.7.1)
   rake
   rspec
