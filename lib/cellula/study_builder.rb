@@ -1,16 +1,16 @@
 module Cellula
 
-  # Public: Provides an interface to build Student objects.
+  # Public: Provides an interface to build Study objects.
   # 
   # Examples
   #
-  #   ca = StudentBuilder.new("CA name").build
-  #   ca = StudentBuilder.new("CA name").generations(99).build
+  #   ca = StudyBuilder.new("CA name").build
+  #   ca = StudyBuilder.new("CA name").generations(99).build
   class StudyBuilder
 
-    # Public: Initialize an new StudentBuilder.
+    # Public: Initialize an new StudyBuilder.
     #
-    # ca_name - String name of the cellular automaton that the Student
+    # ca_name - String name of the cellular automaton that the Study
     #           wants to study.
     def initialize(ca_name)
       @ca_name = ca_name
@@ -30,10 +30,10 @@ module Cellula
     # Returns self.
     def generations(val); @generations = val; self; end
 
-    # Public: Builds a Student with characteristics given with
+    # Public: Builds a Study with characteristics given with
     # the setters methods.
     #
-    # Returns Student.
+    # Returns Study.
     def build
       Study.new(@ca_name, @method, @generations)
     end

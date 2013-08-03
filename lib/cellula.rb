@@ -34,15 +34,15 @@ module Cellula
     @auto = Docile.dsl_eval(AutomatonBuilder.new(name), &block).build
   end
 
-  # Internal: Part of the DSL API, this method builds a new Student
-  # object via StudentBuilder.
+  # Internal: Part of the DSL API, this method builds a new Study
+  # object via StudyBuilder.
   #
   # name  - String name of the automaton to study.
   # block - A Ruby block to build the automaton.
   #
   # Returns nothing.
   def study(name, &block)
-    @student = Docile.dsl_eval(StudyBuilder.new(name), &block).build
+    @study = Docile.dsl_eval(StudyBuilder.new(name), &block).build
   end
 
   # Public: Display a banner on stdout.

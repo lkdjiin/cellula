@@ -1,16 +1,16 @@
 module Cellula
 
-  # Public: This class provides all it's needed to set up a student.
-  # Student' goal is to study cellular automaton.
+  # Public: This class provides all it's needed to set up a study.
+  # Study's goal is to study cellular automaton.
   #
-  # You rarely wants to initialize an Student object directly. This is
-  # because Student's creation needs a lots of parameters. It is
-  # much more simpler to create a Student object using StudentBuilder.
+  # You rarely wants to initialize an Study object directly. This is
+  # because Study's creation needs a lots of parameters. It is
+  # much more simpler to create a Study object using StudyBuilder.
   #
   # TODO Document studying methods.
   class Study
 
-    # Public: Initialize a new Student.
+    # Public: Initialize a new Study.
     #
     # ca_name     - String name of the automaton to study.
     # method      - Symbol how to study the automaton.

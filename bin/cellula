@@ -14,9 +14,9 @@ if ARGV[0].nil?
 end
 
 load ARGV[0].dup
-puts @student.say_hello
+puts @study.say_hello
 puts
 
-@auto.generate(@student.generations) do |num, generation|
+@auto.generate(@study.generations) do |num, generation|
   printf "%4s: %s\n", num, generation.join()
 end

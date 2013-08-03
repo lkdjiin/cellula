@@ -2,7 +2,7 @@ require './spec/helper'
 
 describe StudyBuilder do
 
-  describe "builds student with default values" do# {{{
+  describe "builds study with default values" do# {{{
     before { @object = StudyBuilder.new("cellular automaton name").build }
     subject { @object }
 
