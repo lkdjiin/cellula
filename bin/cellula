@@ -17,6 +17,6 @@ load ARGV[0].dup
 puts @study.say_hello
 puts
 
-@auto.generate(@study.generations) do |num, generation|
+@auto.generate(@study) do |num, generation|
   printf "%4s: %s\n", num, generation.join()
 end

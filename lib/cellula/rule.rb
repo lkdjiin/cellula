@@ -25,9 +25,10 @@ module Cellula
     #
     # cell_number - Integer number of the cell to apply the rule on.
     # grid        - The entire grid as an Array of Integer.
+    # study       - Study instance.
     #
     # Returns the Integer new state of the cell for the next generation.
-    def apply_rule(cell_number, grid)
+    def apply_rule(cell_number, grid, study)
       width = grid.size
       cell = grid[cell_number]
       left_cell = if cell_number > 0

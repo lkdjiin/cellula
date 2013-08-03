@@ -48,16 +48,16 @@ module Cellula
     attr_reader :rule
 
     # Public: Generate successive generations of this automaton.
+    # If, for example, `student.generations == 4` then #generate will
+    # produce 5 generations: The original generation plus the four you
+    # want.
     #
-    # total_generations - Integer number of generations to produce.
-    #                     If, for example, `total_generations == 4` then
-    #                     #generate will produce 5 generations: The
-    #                     original generation plus the four you want.
-    # block             - What to do with a generation.
+    # study - Study instance.
+    # block - What to do with a generation.
     #
     # Example
     #
-    #    automaton.generate(10) do |num, generation|
+    #    automaton.generate(study) do |num, generation|
     #      printf "Gen %4s: %s\n", num, generation.join()
     #    end
     #    # => will result in something like that:
@@ -68,10 +68,10 @@ module Cellula
     #    # => Gen    4: 0010000010000000010001000001001000000000
     #
     # Returns successive generations as Array.
-    def generate(total_generations, &block)
+    def generate(study, &block)
       block.call(0, @grid)
-      1.upto(total_generations) do |i|
-        apply_rule
+      1.upto(study.generations) do |i|
+        apply_rule(study)
         block.call(i, @grid)
       end
     end
@@ -80,10 +80,12 @@ module Cellula
 
     # Apply rule to the entire grid. @grid becomes the next generation.
     #
+    # study - Study instance.
+    #
     # Returns nothing.
-    def apply_rule
+    def apply_rule(study)
       next_grid = @grid.map.with_index do |cell, i|
-        @rule.apply_rule(i, @grid)
+        @rule.apply_rule(i, @grid, study)
       end
       @grid = next_grid
     end

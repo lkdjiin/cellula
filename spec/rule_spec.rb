@@ -33,17 +33,17 @@ describe Rule do
       @grid = [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0]
     end 
 
-    specify { @object.apply_rule(0, @grid).should == 0 }
-    specify { @object.apply_rule(1, @grid).should == 1 }
-    specify { @object.apply_rule(2, @grid).should == 0 }
-    specify { @object.apply_rule(3, @grid).should == 0 }
-    specify { @object.apply_rule(4, @grid).should == 0 }
-    specify { @object.apply_rule(5, @grid).should == 0 }
-    specify { @object.apply_rule(6, @grid).should == 0 }
-    specify { @object.apply_rule(7, @grid).should == 0 }
-    specify { @object.apply_rule(8, @grid).should == 1 }
-    specify { @object.apply_rule(9, @grid).should == 0 }
-    specify { @object.apply_rule(10, @grid).should == 0 }
+    specify { @object.apply_rule(0, @grid, nil).should == 0 }
+    specify { @object.apply_rule(1, @grid, nil).should == 1 }
+    specify { @object.apply_rule(2, @grid, nil).should == 0 }
+    specify { @object.apply_rule(3, @grid, nil).should == 0 }
+    specify { @object.apply_rule(4, @grid, nil).should == 0 }
+    specify { @object.apply_rule(5, @grid, nil).should == 0 }
+    specify { @object.apply_rule(6, @grid, nil).should == 0 }
+    specify { @object.apply_rule(7, @grid, nil).should == 0 }
+    specify { @object.apply_rule(8, @grid, nil).should == 1 }
+    specify { @object.apply_rule(9, @grid, nil).should == 0 }
+    specify { @object.apply_rule(10, @grid, nil).should == 0 }
   end
 end
 
