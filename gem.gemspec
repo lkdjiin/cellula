@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 	s.executables = ['cellula']
   s.add_dependency 'docile', '1.1.0'
   s.add_development_dependency 'rspec'
+  s.add_development_dependency 'reek'
   s.add_development_dependency 'coco', '>= 0.7.1'
   s.add_development_dependency('yard')
   s.add_development_dependency('yard-tomdoc')
