@@ -6,7 +6,7 @@ module Cellula
   #
   #   ca = StudentBuilder.new("CA name").build
   #   ca = StudentBuilder.new("CA name").generations(99).build
-  class StudentBuilder
+  class StudyBuilder
 
     # Public: Initialize an new StudentBuilder.
     #
@@ -35,7 +35,7 @@ module Cellula
     #
     # Returns Student.
     def build
-      Student.new(@ca_name, @method, @generations)
+      Study.new(@ca_name, @method, @generations)
     end
   end
 end

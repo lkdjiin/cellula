@@ -1,8 +1,8 @@
 require 'docile'
 require 'cellula/automaton'
-require 'cellula/student'
+require 'cellula/study'
 require 'cellula/automaton_builder'
-require 'cellula/student_builder'
+require 'cellula/study_builder'
 require 'cellula/rule'
 
 # Public: Cellula is a framework for building, running and studying
@@ -42,7 +42,7 @@ module Cellula
   #
   # Returns nothing.
   def study(name, &block)
-    @student = Docile.dsl_eval(StudentBuilder.new(name), &block).build
+    @student = Docile.dsl_eval(StudyBuilder.new(name), &block).build
   end
 
   # Public: Display a banner on stdout.

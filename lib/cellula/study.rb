@@ -8,11 +8,11 @@ module Cellula
   # much more simpler to create a Student object using StudentBuilder.
   #
   # TODO Document studying methods.
-  class Student
+  class Study
 
     # Public: Initialize a new Student.
     #
-    # ca_name        - String ca_name of the automaton to study.
+    # ca_name     - String name of the automaton to study.
     # method      - Symbol how to study the automaton.
     #               Default is :random.
     #               Could be one of:
@@ -41,7 +41,8 @@ module Cellula
     attr_accessor :generations
 
     def say_hello
-      "Hello, I'm studying #{@ca_name} with #{@method} method."
+      "Studying #{@ca_name} with #{@method} method " +
+      "over #{@generations} generations."
     end
   end
 end
