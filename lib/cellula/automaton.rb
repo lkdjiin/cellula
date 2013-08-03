@@ -70,9 +70,9 @@ module Cellula
     # Returns successive generations as Array.
     def generate(study, &block)
       block.call(0, @grid)
-      1.upto(study.generations) do |i|
+      1.upto(study.generations) do |cell_index|
         apply_rule(study)
-        block.call(i, @grid)
+        block.call(cell_index, @grid)
       end
     end
 
@@ -84,8 +84,8 @@ module Cellula
     #
     # Returns nothing.
     def apply_rule(study)
-      next_grid = @grid.map.with_index do |cell, i|
-        @rule.apply_rule(i, @grid, study)
+      next_grid = @grid.map.with_index do |cell, index|
+        @rule.apply_rule(index, @grid, study)
       end
       @grid = next_grid
     end

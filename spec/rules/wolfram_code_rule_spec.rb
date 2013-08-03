@@ -48,5 +48,38 @@ describe WolframCodeRule do
     specify { @object.apply_rule(10, @grid, nil).should == 0 }
   end# }}}
 
+  describe "self#wolfram_code" do# {{{
+    it "should return the code" do
+      WolframCodeRule.wolfram_code(:wolfram_code_123).should == 123
+    end
+
+    it "should exit with code < 0" do
+      lambda do
+        WolframCodeRule.wolfram_code(:"wolfram_code_-1")
+      end.should raise_error(SystemExit)
+    end
+
+    it "should exit with code > 255" do
+      lambda do
+        WolframCodeRule.wolfram_code(:wolfram_code_256)
+      end.should raise_error(SystemExit)
+    end
+  end# }}}
+
+  describe "self#wolfram_code?" do# {{{
+    it "should tell yes if good code" do
+      WolframCodeRule.wolfram_code?(:wolfram_code_123).should be_true
+    end
+
+    it "should tell no if bad symbol" do
+      WolframCodeRule.wolfram_code?(:wolfram_123).should be_false
+    end
+
+    it "should tell no if not a symbol" do
+      WolframCodeRule.wolfram_code?(123).should be_false
+    end
+
+  end# }}}
+
 end
 

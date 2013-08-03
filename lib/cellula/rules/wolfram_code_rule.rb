@@ -11,11 +11,14 @@ module Cellula
     # rule_number - Integer number of the wolfram code (a number between
     #               0 and 255).
     def initialize(rule_number)
+      @rule_number = rule_number
       begin
-        @rule_number = check rule_number
-      rescue Exception => e
-        panic e.message
+        check_rule_number
+      rescue Exception => ex
+        panic ex.message
       end
+      # TODO explain binary_string
+      @binary_string = "%08b" % @rule_number
     end
 
     # Public: Get the Integer wolfram code of the rule.
@@ -29,41 +32,78 @@ module Cellula
     #
     # Returns the Integer new state of the cell for the next generation.
     def apply_rule(cell_number, grid, study)
-      width = grid.size
-      cell = grid[cell_number]
-      left_cell = if cell_number > 0
-        grid[cell_number - 1]
+      @cell_number = cell_number
+      @grid = grid
+      case [left_cell, grid[cell_number], right_cell]
+      when [1,1,1] then @binary_string[0].to_i
+      when [1,1,0] then @binary_string[1].to_i
+      when [1,0,1] then @binary_string[2].to_i
+      when [1,0,0] then @binary_string[3].to_i
+      when [0,1,1] then @binary_string[4].to_i
+      when [0,1,0] then @binary_string[5].to_i
+      when [0,0,1] then @binary_string[6].to_i
+      when [0,0,0] then @binary_string[7].to_i
+      end
+    end
+
+    # Get the Integer number part of a :wolfram_code_X pattern.
+    #
+    # pattern - Wolfram code pattern as a Symbol.
+    #
+    # Returns the Integer number part of the pattern.
+    # Exit application if the resulting number isn't between 0 and 255.
+    def self.wolfram_code(pattern)
+      pattern = pattern.to_s
+      num = pattern.delete("wolfram_code_").to_i
+      if num < 0 || num > 255
+        panic "Bad wolfram code: #{pattern}"
       else
-        grid[-1]
+        num
       end
-      right_cell = if cell_number == width - 1
-        grid[0]
-      else
-        grid[cell_number + 1]
-      end
-      binary_string = "%08b" % @rule_number
-      case [left_cell, cell, right_cell]
-      when [1,1,1] then binary_string[0].to_i
-      when [1,1,0] then binary_string[1].to_i
-      when [1,0,1] then binary_string[2].to_i
-      when [1,0,0] then binary_string[3].to_i
-      when [0,1,1] then binary_string[4].to_i
-      when [0,1,0] then binary_string[5].to_i
-      when [0,0,1] then binary_string[6].to_i
-      when [0,0,0] then binary_string[7].to_i
-      end
+    end
+
+    # Tells if a symbol follow the :wolfram_code_X pattern.
+    #
+    # symb - The Symbol to test.
+    #
+    # Returns Boolean true if sym is a :wolfram_code_X pattern.
+    def self.wolfram_code?(symb)
+      symb.is_a?(Symbol) && symb.to_s.start_with?("wolfram_code_")
     end
 
     private
 
-    # Returns its argument if it's in the range 0..255.
-    # Raises ArgumentError if number isn't in the range 0..255.
-    def check number
-      if number >= 0 and number <= 255
-        number
+    # Get state of the cell to the left of the current one.
+    #
+    # Returns 0 or 1.
+    def left_cell
+      if @cell_number > 0
+        @grid[@cell_number - 1]
       else
+        @grid[-1]
+      end
+    end
+
+    # Get state of the cell to the right of the current one.
+    #
+    # Returns 0 or 1.
+    def right_cell
+      if @cell_number == @grid.size - 1
+        @grid[0]
+      else
+        @grid[@cell_number + 1]
+      end
+    end
+
+    # Check if rule's number (@rule_number) is in the range 0..255.
+    #
+    # Returns nothing.
+    # Raises ArgumentError if rule's number isn't in the range 0..255.
+    def check_rule_number
+      unless @rule_number >= 0 and @rule_number <= 255
         raise ArgumentError, "Bad Wolfram Code: #{number}"
       end
     end
   end
+
 end
