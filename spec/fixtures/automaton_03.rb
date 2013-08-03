@@ -7,5 +7,5 @@ end
 
 study "Test CA" do
   method      :random
-  generations 80
+  generations 25
 end

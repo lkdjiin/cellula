@@ -1,37 +1,39 @@
 require './spec/helper'
 
-describe Rule do
+describe WolframCodeRule do
 
   describe "creation" do# {{{
-    it "should raise error if rule_number isn't a symbol" do
-      lambda {Rule.new(110)}.should raise_error(SystemExit)
+
+    it "should retain rule number" do
+      object = WolframCodeRule.new(110)
+      object.rule_number.should == 110
+    end
+
+    it "should raise error if rule_number isn't an integer" do
+      lambda do
+        WolframCodeRule.new(:foo_bar_110)
+      end.should raise_error(SystemExit)
     end
 
     it "should raise error if rule_number is greater than 255" do
-      lambda {Rule.new(:wolfram_code_256)}.should raise_error(SystemExit)
+      lambda do
+        WolframCodeRule.new(256)
+      end.should raise_error(SystemExit)
     end
 
     it "should raise error if rule_number is less than 0" do
-      lambda {Rule.new(:"wolfram_code_-110")}.should raise_error(SystemExit)
+      lambda do
+        WolframCodeRule.new(-110)
+      end.should raise_error(SystemExit)
     end
 
-    it "should raise error if rule_number is dumb" do
-      lambda {Rule.new(:foo_bar_110)}.should raise_error(SystemExit)
-    end
   end# }}}
 
-  describe "rule number" do
-    it "should deducts rule number" do
-      object = Rule.new(:wolfram_code_110)
-      object.rule_number.should == 110
-    end
-  end
-
-  describe "applying a rule" do
+  describe "applying a rule" do# {{{
     before do
-      @object = Rule.new(:wolfram_code_4)
+      @object = WolframCodeRule.new(4)
       @grid = [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0]
-    end 
+    end
 
     specify { @object.apply_rule(0, @grid, nil).should == 0 }
     specify { @object.apply_rule(1, @grid, nil).should == 1 }
@@ -44,6 +46,7 @@ describe Rule do
     specify { @object.apply_rule(8, @grid, nil).should == 1 }
     specify { @object.apply_rule(9, @grid, nil).should == 0 }
     specify { @object.apply_rule(10, @grid, nil).should == 0 }
-  end
+  end# }}}
+
 end
 
