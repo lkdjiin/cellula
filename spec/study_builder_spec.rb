@@ -45,9 +45,9 @@ describe StudyBuilder do
     end
 
     describe "invalid method" do
-      it "should exit if method isn't :random" do
+      it "should exit if method is unknown" do
         lambda do
-          StudyBuilder.new("ca name").method(:single).build
+          StudyBuilder.new("ca name").method(:unknown).build
         end.should raise_error(SystemExit)
       end
     end

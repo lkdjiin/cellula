@@ -69,6 +69,10 @@ module Cellula
     #
     # Returns successive generations as Array.
     def generate(study, &block)
+      if study.method == :single
+        @grid = Array.new(study.generations + 1, 0)
+        @grid[0] = 1
+      end
       block.call(0, @grid)
       1.upto(study.generations) do |cell_index|
         apply_rule(study)

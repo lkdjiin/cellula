@@ -1,11 +1,11 @@
 automaton "Test CA" do
   dimensions 1
   type      :elementary
+  rule      :wolfram_code_54
   width     80
-  rule      :wolfram_code_104
 end
 
 study "Test CA" do
-  method      :random
-  generations 25
+  method      :single
+  generations 20
 end

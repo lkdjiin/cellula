@@ -34,15 +34,9 @@ module Cellula
     def apply_rule(cell_number, grid, study)
       @cell_number = cell_number
       @grid = grid
-      case [left_cell, grid[cell_number], right_cell]
-      when [1,1,1] then @binary_string[0].to_i
-      when [1,1,0] then @binary_string[1].to_i
-      when [1,0,1] then @binary_string[2].to_i
-      when [1,0,0] then @binary_string[3].to_i
-      when [0,1,1] then @binary_string[4].to_i
-      when [0,1,0] then @binary_string[5].to_i
-      when [0,0,1] then @binary_string[6].to_i
-      when [0,0,0] then @binary_string[7].to_i
+      case study.method
+      when :random then apply_rule_with_random_method
+      when :single then apply_rule_with_single_method
       end
     end
 
@@ -73,6 +67,19 @@ module Cellula
 
     private
 
+    def apply_rule_with_random_method
+      case [left_cell, @grid[@cell_number], right_cell]
+      when [1,1,1] then @binary_string[0].to_i
+      when [1,1,0] then @binary_string[1].to_i
+      when [1,0,1] then @binary_string[2].to_i
+      when [1,0,0] then @binary_string[3].to_i
+      when [0,1,1] then @binary_string[4].to_i
+      when [0,1,0] then @binary_string[5].to_i
+      when [0,0,1] then @binary_string[6].to_i
+      when [0,0,0] then @binary_string[7].to_i
+      end
+    end
+
     # Get state of the cell to the left of the current one.
     #
     # Returns 0 or 1.
@@ -95,6 +102,35 @@ module Cellula
       end
     end
 
+    def apply_rule_with_single_method
+      case [left_cell_single, @grid[@cell_number], right_cell_single]
+      when [1,1,1] then @binary_string[0].to_i
+      when [1,1,0] then @binary_string[1].to_i
+      when [1,0,1] then @binary_string[2].to_i
+      when [1,0,0] then @binary_string[3].to_i
+      when [0,1,1] then @binary_string[4].to_i
+      when [0,1,0] then @binary_string[5].to_i
+      when [0,0,1] then @binary_string[6].to_i
+      when [0,0,0] then @binary_string[7].to_i
+      end
+    end
+
+    def left_cell_single
+      if @cell_number > 0
+        @grid[@cell_number - 1]
+      else
+        0
+      end
+    end
+
+    def right_cell_single
+      if @cell_number == @grid.size - 1
+        0
+      else
+        @grid[@cell_number + 1]
+      end
+    end
+
     # Check if rule's number (@rule_number) is in the range 0..255.
     #
     # Returns nothing.
@@ -104,6 +140,7 @@ module Cellula
         raise ArgumentError, "Bad Wolfram Code: #{number}"
       end
     end
+
   end
 
 end
