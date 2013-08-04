@@ -67,6 +67,7 @@ module Cellula
 
     private
 
+    # Returns 0 or 1.
     def apply_rule_with_random_method
       case [left_cell, @grid[@cell_number], right_cell]
       when [1,1,1] then @binary_string[0].to_i
@@ -102,6 +103,7 @@ module Cellula
       end
     end
 
+    # Returns 0 or 1.
     def apply_rule_with_single_method
       case [left_cell_single, @grid[@cell_number], right_cell_single]
       when [1,1,1] then @binary_string[0].to_i
@@ -115,6 +117,7 @@ module Cellula
       end
     end
 
+    # Returns 0 or 1.
     def left_cell_single
       if @cell_number > 0
         @grid[@cell_number - 1]
@@ -123,6 +126,7 @@ module Cellula
       end
     end
 
+    # Returns 0 or 1.
     def right_cell_single
       if @cell_number == @grid.size - 1
         0
