@@ -17,7 +17,7 @@ running and studying cellular automata.}
 		list.exclude('TODO')
 	end.to_a
   s.files = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*'].to_a + readmes
-	s.license = ''
+	s.license = 'Apache v2 License'
 	s.required_ruby_version = '>= 2.0.0'
 	s.executables = ['cellula']
   s.add_dependency 'docile', '1.1.0'
