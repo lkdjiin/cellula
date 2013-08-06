@@ -1,14 +1,17 @@
 Cellula
 ================
 
-
 Description
 -----------
 
-Cellula's goal is to be a framework for building, running and studying
-cellular automata. For this, Cellula provides a simple DSL.
+Cellula aims to be a framework for building, running and studying
+cellular automata.
 
-Following is an example of Cellula DSL:
+My main goal with Cellula is to *study* cellular automata, not only to *run*
+them, so don't expect fancy graphics.
+
+Another goal is to provide a simple DSL, allowing non-programmers to use
+Cellula. Following is an example of Cellula DSL:
 
 ``` ruby
 automaton "Test CA" do
@@ -29,6 +32,7 @@ launch it with:
 
     cellula path/to/my_automaton.rb
 
+
 Install
 -------------------------
 
@@ -36,9 +40,28 @@ Install
 
 Usage
 --------------------------
-This is a work in progress. More documentation is coming…
+*This is a work in progress. More documentation is coming…*
 
+### automaton specifications
 
+* dimensions
+  Number of dimensions of the grid. Currently Cellula supports only
+  1D grids.
+* type
+  Type of the automaton. Currently only :elementary (one-dimensional, 2
+  possible states per cell, neighbors are the immediate neighbors' cells.
+* width
+  Width of the grid.
+* rule
+  Currently only Wolfram code.
+
+### study specifications
+
+* method
+  The study's method. Could be :random or :single. (View doc/study.rb
+  for more details)
+* generations
+  Number of generations to process.
 
 Dependencies
 --------------------------
