@@ -23,3 +23,8 @@ desc 'Generate documentation'
 task :doc do
   sh "yard --plugin tomdoc"
 end
+
+desc "Generate the changelog"
+task :changelog do
+  system "git changelog > Changelog.markdown"
+end
