@@ -1,17 +1,42 @@
-FIXME [![Build Status](https://travis-ci.org/lkdjiin/FIXME.png)](https://travis-ci.org/lkdjiin/FIXME)
+Cellula
 ================
 
 
 Description
 -----------
 
+Cellula's goal is to be a framework for building, running and studying
+cellular automata. For this, Cellula provides a simple DSL.
+
+Following is an example of Cellula DSL:
+
+``` ruby
+automaton "Test CA" do
+  dimensions 1
+  type       :elementary
+  width      20
+  rule       :wolfram_code_110
+end
+
+study "Test CA" do
+  method      :random
+  generations 4
+end
+```
+
+Save the previous example in a file named `my_automaton.rb` and
+launch it with:
+
+    cellula path/to/my_automaton.rb
 
 Install
 -------------------------
 
+    gem install cellula
 
 Usage
 --------------------------
+This is a work in progress. More documentation is coming…
 
 
 
@@ -34,12 +59,12 @@ Contributing
 1. Report any bug
 2. Give me ideas
 3. Correct my poor english syntax
-4. Blog about FIXME
-5. Tell FIXME to your friends and colleagues
+4. Blog about Cellula
+5. Tell Cellula to your friends and colleagues
 
 License
 --------------------------
-
+Apache v2 License (See LICENSE file).
 
 
 Questions and/or Comments
