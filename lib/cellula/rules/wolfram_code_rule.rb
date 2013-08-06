@@ -69,16 +69,7 @@ module Cellula
 
     # Returns 0 or 1.
     def apply_rule_with_random_method
-      case [left_cell, @grid[@cell_number], right_cell]
-      when [1,1,1] then @binary_string[0].to_i
-      when [1,1,0] then @binary_string[1].to_i
-      when [1,0,1] then @binary_string[2].to_i
-      when [1,0,0] then @binary_string[3].to_i
-      when [0,1,1] then @binary_string[4].to_i
-      when [0,1,0] then @binary_string[5].to_i
-      when [0,0,1] then @binary_string[6].to_i
-      when [0,0,0] then @binary_string[7].to_i
-      end
+      next_generation_cell(left_cell, @grid[@cell_number], right_cell)
     end
 
     # Get state of the cell to the left of the current one.
@@ -105,7 +96,12 @@ module Cellula
 
     # Returns 0 or 1.
     def apply_rule_with_single_method
-      case [left_cell_single, @grid[@cell_number], right_cell_single]
+      next_generation_cell(left_cell_single, @grid[@cell_number], right_cell_single)
+    end
+
+    # Returns 0 or 1.
+    def next_generation_cell(left, middle, right)
+      case [left, middle, right]
       when [1,1,1] then @binary_string[0].to_i
       when [1,1,0] then @binary_string[1].to_i
       when [1,0,1] then @binary_string[2].to_i

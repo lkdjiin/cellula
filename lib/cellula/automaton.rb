@@ -69,10 +69,7 @@ module Cellula
     #
     # Returns successive generations as Array.
     def generate(study, &block)
-      if study.method == :single
-        @grid = Array.new(study.generations + 1, 0)
-        @grid[0] = 1
-      end
+      adapt_for_single_method if study.method == :single
       block.call(0, @grid)
       1.upto(study.generations) do |cell_index|
         apply_rule(study)
@@ -81,6 +78,13 @@ module Cellula
     end
 
     private
+
+    # Returns nothing.
+    def adapt_for_single_method
+      @width += 1 if @width % 2 == 0
+      @grid = Array.new(@width, 0)
+      @grid[@width / 2] = 1
+    end
 
     # Apply rule to the entire grid. @grid becomes the next generation.
     #

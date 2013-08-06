@@ -17,10 +17,10 @@ load ARGV[0].dup
 puts @study.say_hello
 puts
 
-def to_single(gen)
-  str = gen.join
-  md = /(.*?)0*$/.match(str)
-  md[1]
+def to_single_1_histories(gen)
+  right_remove = (gen[1].size - (gen[0] * 2 + 1)) / 2
+  gen[1].pop(right_remove)
+  gen[1].join
 end
 
 generations = []
@@ -29,15 +29,12 @@ generations = []
   generations << [num, generation]
 end
 
-if @study.method == :random
-  generations.each do |gen|
-    printf "%4s: %s\n", gen[0], gen[1].join()
-  end
-elsif @study.method == :single
-  generations.each do |gen|
-    printf "%4s: %s\n", gen[0], gen[1].join()
-  end
-  puts "Unique numbers: " +
-    generations.map{|e| to_single(e[1]).to_i(2)}.uniq.join(', ')
+generations.each do |gen|
+  printf "%4s: %s\n", gen[0], gen[1].join()
+end
+
+if @study.method == :single
+  puts "Serie: " +
+    generations.map{|e| to_single_1_histories(e).to_i(2)}.join(', ')
 end
 
