@@ -7,7 +7,29 @@ module Cellula
   # because Automaton's creation needs a lots of parameters. It is
   # much more simpler to create Automata using AutomatonBuilder class.
   #
-  # TODO Document rule.
+  # Dimensions
+  # ----------
+  # Currently only support 1D cellular automata.
+  #
+  # Type of automaton
+  # -----------------
+  # Currently only support elementary cellular automaton. Quoted from
+  # Wikipedia:
+  #
+  # an elementary cellular automaton is a one-dimensional cellular
+  # automaton where there are two possible states (labeled 0 and 1)
+  # and the rule to determine the state of a cell in the next generation
+  # depends only on the current state of the cell and its two immediate
+  # neighbors. 
+  #
+  # See http://en.wikipedia.org/wiki/Elementary_cellular_automaton
+  # for more details.
+  #
+  # Rule
+  # ----
+  # Currently support only wolfram code rules.
+  #
+  # I hope to support custom rules and types soon.
   class Automaton
 
     # Public: Initialize a new Automaton.
@@ -17,9 +39,10 @@ module Cellula
     #               grid. Default is 1.
     # type        - Currently only :elementary.
     # width       - The Integer width of the automaton's grid.
-    # rule_number - Rule of the automaton. TODO write more about the types.
-    #               Currently rule is a Symbol.
-    def initialize(name, dimensions, type, width, rule_number)
+    # rule        - Rule of the automaton. Currently rule is a Symbol
+    #               following this pattern: :wolfram_code_X, where X is
+    #               the rule number, from 0 to 255.
+    def initialize(name, dimensions, type, width, rule)
       panic "Bad dimensions: #{dimensions}" if dimensions != 1
       panic "Bad type: #{type}" if type != :elementary
       panic "Bad width: #{width}" if width < 1
@@ -27,7 +50,7 @@ module Cellula
       @dimensions = dimensions
       @type = type
       @width = width
-      @rule = Rule.new(rule_number)
+      @rule = Rule.new(rule)
       @grid = Array.new(@width)
       @grid.map! {|item| rand(2) }
     end

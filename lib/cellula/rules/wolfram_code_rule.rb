@@ -17,7 +17,6 @@ module Cellula
       rescue Exception => ex
         panic ex.message
       end
-      # TODO explain binary_string
       @binary_string = "%08b" % @rule_number
     end
 

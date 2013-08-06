@@ -1,7 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-# todo: replace [GEM] by th gem name
-
 require 'rake'
 require 'rspec/core/rake_task'
 
