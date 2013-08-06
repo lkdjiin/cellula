@@ -77,9 +77,9 @@ Contributing
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-### There is many other ways to contibute to FIXME
+### There is many other ways to contibute to Cellula
 
-1. Report any bug
+1. Report any bugs
 2. Give me ideas
 3. Correct my poor english syntax
 4. Blog about Cellula
