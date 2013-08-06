@@ -7,9 +7,10 @@ Gem::Specification.new do |s|
   s.version = File.read('VERSION').strip
   s.authors = ['Xavier Nayrac']
   s.email = 'xavier.nayrac@gmail.com'
-  s.summary = 'Cellular Automata DSL'
-  s.homepage = ''
-  s.description = %q{}
+  s.summary = 'Cellular Automata framework with a simple DSL'
+  s.homepage = 'https://github.com/lkdjiin/cellula'
+  s.description = %q{Cellula aims to be a framework for building,
+running and studying cellular automata.}
 	
 	readmes = FileList.new('*') do |list|
 		list.exclude(/(^|[^.a-z])[a-z]+/)
