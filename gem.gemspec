@@ -24,6 +24,6 @@ running and studying cellular automata.}
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'reek'
   s.add_development_dependency 'coco', '>= 0.7.1'
-  s.add_development_dependency('yard')
+  s.add_development_dependency('yard', '~> 0.9.11')
   s.add_development_dependency('yard-tomdoc')
 end
